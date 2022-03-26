@@ -6,6 +6,7 @@ import {AccountService} from "../../../_services/account.service";
 import {take} from "rxjs";
 import {User} from "../../../_models/user.interface";
 import {MembersService} from "../../../_services/members.service";
+import {Photo} from "../../../_models/photo";
 
 @Component({
   selector: 'app-photo-editor',
@@ -50,8 +51,13 @@ export class PhotoEditorComponent implements OnInit {
     };
     this.uploader.onSuccessItem= (item, response, status,  headers) => {
       if (response){
-        const photo = JSON.parse(response);
+        const photo: Photo = JSON.parse(response);
         this.member.photos.push(photo);
+        if (photo.isMain){
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountSv.setCurrentUser(this.user);
+        }
       }
     }
   }

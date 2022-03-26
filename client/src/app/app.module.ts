@@ -22,6 +22,8 @@ import { MemberEditComponent } from './components/members/member-edit/member-edi
 import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./_interceptors/loading.interceptor";
 import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
+import {TextInputComponent} from "./_shared/forms/text-input/text-input.component";
+import {DateInputComponent} from "./_shared/forms/date-input/date-input.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { PhotoEditorComponent } from './components/members/photo-editor/photo-ed
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TextInputComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,

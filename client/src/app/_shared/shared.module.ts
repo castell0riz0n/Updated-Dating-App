@@ -5,11 +5,17 @@ import {ToastrModule} from "ngx-toastr";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import {FileUploadModule} from "ng2-file-upload";
+import { TextInputComponent } from './forms/text-input/text-input.component';
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import { DateInputComponent } from './forms/date-input/date-input.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+
+  ],
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
@@ -18,14 +24,16 @@ import {FileUploadModule} from "ng2-file-upload";
       positionClass: 'toast-bottom-right'
     }),
     NgxGalleryModule,
-    FileUploadModule
+    FileUploadModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
     ToastrModule,
     TabsModule,
     NgxGalleryModule,
-    FileUploadModule
+    FileUploadModule,
+    BsDatepickerModule
   ]
 })
 export class SharedModule { }
