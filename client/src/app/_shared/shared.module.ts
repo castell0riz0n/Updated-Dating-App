@@ -5,16 +5,15 @@ import {ToastrModule} from "ngx-toastr";
 import {TabsModule} from "ngx-bootstrap/tabs";
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import {FileUploadModule} from "ng2-file-upload";
-import { TextInputComponent } from './forms/text-input/text-input.component';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
-import { DateInputComponent } from './forms/date-input/date-input.component';
+import {PaginationModule} from "ngx-bootstrap/pagination";
+import {ButtonsModule} from "ngx-bootstrap/buttons";
+import {TimeagoModule} from "ngx-timeago";
 
 
 
 @NgModule({
   declarations: [
-
-
   ],
   imports: [
     CommonModule,
@@ -25,7 +24,10 @@ import { DateInputComponent } from './forms/date-input/date-input.component';
     }),
     NgxGalleryModule,
     FileUploadModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -33,7 +35,10 @@ import { DateInputComponent } from './forms/date-input/date-input.component';
     TabsModule,
     NgxGalleryModule,
     FileUploadModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    ButtonsModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }
