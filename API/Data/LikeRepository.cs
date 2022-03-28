@@ -23,7 +23,7 @@ public class LikeRepository : ILikeRepository
 
     public async Task<AppUser> GetUserWithLikes(int userId)
     {
-        return await _context.Users.Include(a => a.LikedUser)
+        return await _context.Users.Include(a => a.LikedUsers)
             .FirstOrDefaultAsync(a => a.Id == userId);
     }
 

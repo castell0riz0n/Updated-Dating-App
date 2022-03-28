@@ -48,7 +48,7 @@ public class LikesController : BaseApiController
             SourceUserId = sourceUserId,
             LikedUserId = likedUser.Id
         };
-        sourceUser.LikedUser.Add(userLike);
+        sourceUser.LikedUsers.Add(userLike);
         if (await _userRepository.SaveAllAsync())
         {
             return Ok();

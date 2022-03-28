@@ -17,6 +17,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<ILikeRepository, LikeRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddDbContext<DataContext>(opts =>
         {
             opts.UseSqlite(configuration.GetConnectionString("DefaultConnection"));

@@ -21,5 +21,12 @@ public class AutoMapperProfile : Profile
         CreateMap<Photo, PhotoDto>().ReverseMap();
         CreateMap<MemberUpdateDto, AppUser>();
         CreateMap<RegisterDto, AppUser>();
+        CreateMap<Message, MessageDto>()
+            .ForMember(dest => dest.SenderPhotoUrl,
+                opt => opt.MapFrom(
+                    src => src.Sender.Photos.FirstOrDefault(a => a.IsMain).Url))
+            .ForMember(dest => dest.RecipientPhotoUrl,
+                opt => opt.MapFrom(
+                    src => src.Recipient.Photos.FirstOrDefault(a => a.IsMain).Url));
     }
 }
