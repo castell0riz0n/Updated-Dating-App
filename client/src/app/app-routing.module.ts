@@ -11,6 +11,8 @@ import {ServerErrorComponent} from "./components/_errors/server-error/server-err
 import {MemberEditComponent} from "./components/members/member-edit/member-edit.component";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
 import {MemberDetailResolver} from "./_resolvers/member-detail.resolver";
+import {AdminPanelComponent} from "./components/admin/admin-panel/admin-panel.component";
+import {AdminGuard} from "./_guards/admin.guard";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -24,6 +26,7 @@ const routes: Routes = [
       {path:'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path:'lists', component: ListsComponent},
       {path:'messages', component: MessagesComponent},
+      {path:'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },
   {path:'not-found', component: NotFoundComponent},
