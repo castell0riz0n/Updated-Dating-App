@@ -2,6 +2,7 @@ using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using API.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -41,6 +42,8 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
+builder.Services.AddSignalR();
+
 builder.Services.AddCors();
 
 builder.Services.AddIdentityService(builder.Configuration);
@@ -79,7 +82,8 @@ app.UseRouting();
 app.UseCors(policy => policy
     .AllowAnyHeader()
     .AllowAnyMethod()
-    .WithOrigins("https://localhost:4200"));
+    .AllowCredentials()
+    .WithOrigins("https://localhost:4200","https://192.168.88.247:4200"));
 
 app.UseAuthentication();
 
@@ -88,6 +92,8 @@ app.UseAuthorization();
 app.UseEndpoints(ep =>
 {
     ep.MapControllers();
+    ep.MapHub<PresenceHub>("hubs/presence");
+    ep.MapHub<MessageHub>("hubs/message");
 });
 
 app.Run();

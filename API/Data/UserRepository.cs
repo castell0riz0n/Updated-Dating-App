@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class UserRepository: IUserRepository
+public class UserRepository : IUserRepository
 {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -22,11 +22,6 @@ public class UserRepository: IUserRepository
     public void Update(AppUser user)
     {
         _context.Entry(user).State = EntityState.Modified;
-    }
-
-    public async Task<bool> SaveAllAsync()
-    {
-        return (await _context.SaveChangesAsync()) > 0;
     }
 
     public async Task<IEnumerable<AppUser>> GetUsersAsync()
@@ -69,10 +64,29 @@ public class UserRepository: IUserRepository
             userParams.PageNumber, userParams.PageSize);
     }
 
-    public async Task<MemberDto> GetMemberAsync(string username)
+    public async Task<MemberDto> GetMemberAsync(string username, bool?
+        isCurrentUser)
     {
-        return await _context.Users.Where(a => a.UserName == username.ToLower())
+        var query = _context.Users
+            .Where(x => x.UserName == username)
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .SingleOrDefaultAsync();
+            .AsQueryable();
+        if (isCurrentUser.Value) query = query.IgnoreQueryFilters();
+        return await query.FirstOrDefaultAsync();
+    }
+
+    public async Task<string> GetUserGenderAsync(string username)
+    {
+        return await _context.Users.Where(a => a.UserName == username)
+            .Select(a => a.Gender).FirstOrDefaultAsync();
+    }
+    
+    public async Task<AppUser> GetUserByPhotoId(int photoId)
+    {
+        return await _context.Users
+            .Include(p => p.Photos)
+            .IgnoreQueryFilters()
+            .Where(p => p.Photos.Any(p => p.Id == photoId))
+            .FirstOrDefaultAsync();
     }
 }

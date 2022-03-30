@@ -11,11 +11,13 @@ import {ButtonsModule} from "ngx-bootstrap/buttons";
 import {TimeagoModule} from "ngx-timeago";
 import {HasRoleDirective} from './directives/has-role.directive';
 import {ModalModule} from "ngx-bootstrap/modal";
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
   declarations: [
-    HasRoleDirective
+    HasRoleDirective,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
